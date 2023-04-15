@@ -17,6 +17,21 @@ public:
     Fraction(int numer, int denom);
     Fraction(double num);
 
+    void simplify() {
+        if (numerator == 0) {
+            denominator = 1;
+        }
+        else {
+            int gcd = std::__gcd(numerator, denominator);
+            numerator /= gcd;
+            denominator /= gcd;
+
+            if (denominator < 0) {
+                numerator *= -1;
+                denominator *= -1;
+            }
+        }
+    }
 
 // Overloaded + operator
     Fraction operator+(const Fraction& other) const {
@@ -90,7 +105,7 @@ public:
 // Overloaded pre-increment operator
     Fraction& operator++() {
         numerator += denominator;
-        //simplify(); //need to implement
+        simplify();
         return *this;
     }
 
@@ -98,13 +113,15 @@ public:
     Fraction operator++(int) {
         Fraction temp(*this);
         ++(*this);
+        simplify();// simplify to this
+        // simplify to temp already done in constructor
         return temp;
     }
 
 // Overloaded pre-decrement operator
     Fraction& operator--() {
         numerator -= denominator;
-        //simplify();
+        simplify();
         return *this;
     }
 
@@ -112,6 +129,8 @@ public:
     Fraction operator--(int) {
         Fraction temp(*this);
         --(*this);
+        simplify();// simplify to 'this'
+        // simplify to temp already done in constructor
         return temp;
     }
 

@@ -9,6 +9,11 @@ Fraction::Fraction(int numer, int denom)
 {
     numerator = numer;
     denominator = denom;
+    if (denominator == 0)
+    {
+        throw std::runtime_error("Denominator cannot be zero!");
+    }
+    simplify();
 }
 
 // Empty constructor
@@ -20,48 +25,30 @@ Fraction::Fraction() {
 // One-parameter constructor
 Fraction::Fraction (double d)
 {// constructor get double number and convert it to Fraction
-
+    // First, extract the whole part of the double and create a Fraction object from it
     int wholePart = static_cast<int>(d);
     numerator = wholePart;
     denominator = 1;
-    d -= wholePart;
+    // Subtract the whole part from the double to get the fractional part
+    d = d-wholePart;
+    // Use continued fractions to approximate the fractional part of the double as a Fraction object
     const int maxIterations = 30;
     for (int i = 0; i < maxIterations; i++) {
-        d = 1 / d;
-        int intPart = static_cast<int>(d);
+        d = 1 / d;// invert d to get the reciprocal
+        int intPart = static_cast<int>(d);// extract the integer part of the reciprocal
         numerator = numerator * intPart + denominator;
         denominator = numerator - denominator * intPart;
-        if (std::abs(denominator) > 1000) {
+        if (std::abs(denominator) > 1000)
+        {
             break;
         }
-        d -= intPart;
-        if (fabs(d) < 0.0001) {
-            break;
+        d -= intPart;// subtract the integer part from the reciprocal
+        if (fabs(d) < 0.0001)
+        {// check if the remainder is small enough
+            break;// if it is, exit the loop
         }
     }
-
-
-//    // First, extract the whole part of the double and create a Fraction object from it
-//    int wholePart = static_cast<int>(d);
-//    Fraction fraction(wholePart);
-//
-//    // Subtract the whole part from the double to get the fractional part
-//    d -= wholePart;
-//
-//    // Use continued fractions to approximate the fractional part of the double as a Fraction object
-//    const int maxIterations = 30;
-//    for (int i = 0; i < maxIterations; i++) {
-//        d = 1 / d; // invert d to get the reciprocal
-//        int intPart = static_cast<int>(d); // extract the integer part of the reciprocal
-//        fraction = fraction + Fraction(intPart); // add the integer part to the fraction
-//        d -= intPart; // subtract the integer part from the reciprocal
-//        if (fabs(d) < 0.0001) { // check if the remainder is small enough
-//            break; // if it is, exit the loop
-//        }
-//    }
-//
-//    // Return the Fraction object that approximates the original double
-//    return fraction;
+    simplify();
 }
 
 
