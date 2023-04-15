@@ -18,119 +18,50 @@ Fraction::Fraction() {
 };
 
 // One-parameter constructor
-//Fraction(int numer, int denom) : numerator(numer), denominator(denom) {}
-Fraction doubleToFraction(double d) {
+Fraction::Fraction (double d)
+{// constructor get double number and convert it to Fraction
+
     int wholePart = static_cast<int>(d);
-    Fraction fraction(wholePart);
+    numerator = wholePart;
+    denominator = 1;
     d -= wholePart;
     const int maxIterations = 30;
     for (int i = 0; i < maxIterations; i++) {
         d = 1 / d;
         int intPart = static_cast<int>(d);
-        fraction = fraction + Fraction(intPart);
+        numerator = numerator * intPart + denominator;
+        denominator = numerator - denominator * intPart;
+        if (std::abs(denominator) > 1000) {
+            break;
+        }
         d -= intPart;
         if (fabs(d) < 0.0001) {
             break;
         }
     }
-    return fraction;
-}
-//
-//// Operation declaration
-//
-//// Overloaded + operator
-//Fraction operator+(const Fraction& other) const {
-//    int num = numerator * other.denominator + other.numerator * denominator;
-//    int den = denominator * other.denominator;
-//    return Fraction(num, den);
-//}
-//
-//// Overloaded - operator
-//Fraction operator-(const Fraction& other) const {
-//    int num = numerator * other.denominator - other.numerator * denominator;
-//    int den = denominator * other.denominator;
-//    return Fraction(num, den);
-//}
-//
-//// Overloaded * operator
-//Fraction operator*(const Fraction& other) const {
-//    int num = numerator * other.numerator;
-//    int den = denominator * other.denominator;
-//    return Fraction(num, den);
-//}
-//
-//// Overloaded / operator
-//Fraction operator/(const Fraction& other) const {
-//    if (other.numerator == 0) {
-//        throw runtime_error("Cannot divide by zero!");
-//    }
-//    int num = numerator * other.denominator;
-//    int den = denominator * other.numerator;
-//    return Fraction(num, den);
-//}
-//
-//// Overloaded == operator
-//bool operator==(const Fraction& other) const {
-//    return (numerator == other.numerator) && (denominator == other.denominator);
-//}
-//
-//// Overloaded comparison operators
-//bool operator>(const Fraction& other) const {
-//    return (numerator * other.denominator > other.numerator * denominator);
-//}
-//
-//bool operator<(const Fraction& other) const {
-//    return (numerator * other.denominator < other.numerator * denominator);
-//}
-//
-//bool operator>=(const Fraction& other) const {
-//    return (numerator * other.denominator >= other.numerator * denominator);
-//}
-//
-//bool operator<=(const Fraction& other) const {
-//    return (numerator * other.denominator <= other.numerator * denominator);
-//}
-//
-//// Overloaded pre-increment operator
-//Fraction& operator++() {
-//    numerator += denominator;
-//    simplify();
-//    return *this;
-//}
-//
-//// Overloaded post-increment operator
-//Fraction operator++(int) {
-//    Fraction temp(*this);
-//    ++(*this);
-//    return temp;
-//}
-//
-//// Overloaded pre-decrement operator
-//Fraction& operator--() {
-//    numerator -= denominator;
-//    simplify();
-//    return *this;
-//}
-//
-//// Overloaded post-decrement operator
-//Fraction operator--(int) {
-//    Fraction temp(*this);
-//    --(*this);
-//    return temp;
-//}
-//
-//// Overloaded << operator
-//friend ostream& operator<<(ostream& os, const Fraction& frac)
-//// Afriend function or class is allowed to access the private and protected data members of the class that it is a friend of.
-//// This allows the operator<< function to access the private numerator and denominator members of the Fraction class,
-//// which it needs to be able to output the fraction to a stream.
-//{
-//    os << frac.numerator << "/" << frac.denominator;
-//    return os;
-//}
-////std::ostream& operator<<(std::ostream& out, const Fraction& f) {
-////    out << f.num << "/" << f.den;
-////    return out;
 
+
+//    // First, extract the whole part of the double and create a Fraction object from it
+//    int wholePart = static_cast<int>(d);
+//    Fraction fraction(wholePart);
+//
+//    // Subtract the whole part from the double to get the fractional part
+//    d -= wholePart;
+//
+//    // Use continued fractions to approximate the fractional part of the double as a Fraction object
+//    const int maxIterations = 30;
+//    for (int i = 0; i < maxIterations; i++) {
+//        d = 1 / d; // invert d to get the reciprocal
+//        int intPart = static_cast<int>(d); // extract the integer part of the reciprocal
+//        fraction = fraction + Fraction(intPart); // add the integer part to the fraction
+//        d -= intPart; // subtract the integer part from the reciprocal
+//        if (fabs(d) < 0.0001) { // check if the remainder is small enough
+//            break; // if it is, exit the loop
+//        }
+//    }
+//
+//    // Return the Fraction object that approximates the original double
+//    return fraction;
+}
 
 

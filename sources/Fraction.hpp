@@ -77,6 +77,8 @@ public:
         return (numerator * other.denominator < other.numerator * denominator);
     }
 
+// Overloaded comparison and equalization operators
+
     bool operator>=(const Fraction& other) const {
         return (numerator * other.denominator >= other.numerator * denominator);
     }
@@ -88,7 +90,7 @@ public:
 // Overloaded pre-increment operator
     Fraction& operator++() {
         numerator += denominator;
-        //simplify();
+        //simplify(); //need to implement
         return *this;
     }
 
@@ -123,7 +125,7 @@ public:
 
 };
 
-std::ostream& operator<<(std::ostream& out, const Fraction& f) {
+inline std::ostream& operator<<(std::ostream& out, const Fraction& f) {
     out << f.numerator << "/" << f.denominator;
     return out;
 }
