@@ -5,12 +5,23 @@
 #include "Fraction.hpp"
 
 Fraction::Fraction(int numer, int denom)
-//constructor
+// Two-parameter constructor
 {
     numerator = numer;
     denominator = denom;
 }
 
+// Empty constructor
+Fraction() : numerator(0), denominator(1) {}
+
+// Two-parameter constructor
+//Fraction(int numer, int denom) : numerator(numer), denominator(denom) {}
+Fraction(double d) {
+    cpp_int n = boost::math::tools::integer_cast<cpp_int>(d * boost::math::tools::max_value<cpp_int>());
+    cpp_int g = gcd(n, boost::math::tools::max_value<cpp_int>());
+    numerator = boost::math::tools::integer_cast<int>(n / g);
+    denominator = boost::math::tools::integer_cast<int>(boost::math::tools::max_value<cpp_int>() / g);
+}
 
 // Operation declaration
 
@@ -96,13 +107,17 @@ Fraction operator--(int) {
 }
 
 // Overloaded << operator
-//friend ostream& operator<<(ostream& os, const Fraction& frac) {
-//    os << frac.numerator << "/" << frac.denominator;
-//    return os;
-//}
-std::ostream& operator<<(std::ostream& out, const Fraction& f) {
-    out << f.num << "/" << f.den;
-    return out;
+friend ostream& operator<<(ostream& os, const Fraction& frac)
+// Afriend function or class is allowed to access the private and protected data members of the class that it is a friend of.
+// This allows the operator<< function to access the private numerator and denominator members of the Fraction class,
+// which it needs to be able to output the fraction to a stream.
+{
+    os << frac.numerator << "/" << frac.denominator;
+    return os;
+}
+//std::ostream& operator<<(std::ostream& out, const Fraction& f) {
+//    out << f.num << "/" << f.den;
+//    return out;
 }
 
 
