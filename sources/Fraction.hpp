@@ -56,7 +56,7 @@ public:
     // Overloaded / operator
     Fraction operator/(const Fraction& other) const {
         if (other.numerator == 0) {
-            throw runtime_error("Cannot divide by zero!");
+            throw std::runtime_error("Cannot divide by zero!");
         }
         int num = numerator * other.denominator;
         int den = denominator * other.numerator;
