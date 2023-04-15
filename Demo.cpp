@@ -13,7 +13,7 @@ using namespace std;
 
 #include "sources/Fraction.hpp"
 
-using namespace ariel;
+//using namespace ariel;
 
 
 int main() {
