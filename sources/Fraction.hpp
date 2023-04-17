@@ -6,6 +6,7 @@
 #define INC_3TASKA_FRACTION_H
 #include <iostream>
 #include <cmath>
+#include <algorithm>
 
 class Fraction {
 //private:
@@ -17,7 +18,8 @@ public:
     Fraction(int numer, int denom);
     Fraction(double num);
 
-    void simplify() {
+    void simplify()
+    {// For example : 4/8 -> 1/2
         if (numerator == 0) {
             denominator = 1;
         }
@@ -33,16 +35,21 @@ public:
         }
     }
 
-// Overloaded + operator
-    Fraction operator+(const Fraction& other) const {
+// Overloaded + operator (Fraction + otherFraction)
+    Fraction operator+(Fraction& other) {
+        // Calculate the numerator and denominator of the resulting Fraction (Common ground)
         int num = numerator * other.denominator + other.numerator * denominator;
         int den = denominator * other.denominator;
-        return Fraction(num, den);
+        Fraction temp=Fraction(num, den);
+        simplify();
+        return temp;// Return Fraction
     }
-// Overloade operator that can handle the addition of a Fraction object and a double.
-    Fraction operator+(const double& d) const {
+
+// Overloade + operator (Fraction + double)
+    Fraction operator+( const double& d) //the 'const' make sure that the double parameter is treated as a constant and is not modified inside the function.
+    {
         double res = d + (static_cast<double>(numerator) / denominator);
-        return Fraction(res);
+        return Fraction(res);// Return Fraction
     }
 
 
@@ -53,13 +60,22 @@ public:
         return Fraction(num, den);
     }
 
+    // Overloaded - operator
+    Fraction operator-(const double& d)  {
+        ///////////////////////////////////////////////////////////////////////
+
+    }
 // Overloaded * operator
     Fraction operator*(const Fraction& other) const {
         int num = numerator * other.numerator;
         int den = denominator * other.denominator;
         return Fraction(num, den);
     }
+// Overloaded * operator
+    Fraction operator*(const double& d)  {
+        ///////////////////////////////////////////////////////////////////////
 
+    }
     // Overloaded * operator (for double * Fraction)
     friend Fraction operator*(const double& d, const Fraction& f) {
         double res = d * (static_cast<double>(f.numerator) / f.denominator);
@@ -77,31 +93,42 @@ public:
         int den = denominator * other.numerator;
         return Fraction(num, den);
     }
+    // Overloaded / operator
+    Fraction operator/(const double& d)  {
+        ///////////////////////////////////////////////////////////////////////
+    }
+
 
 // Overloaded == operator
     bool operator==(const Fraction& other) const {
         return (numerator == other.numerator) && (denominator == other.denominator);
     }
-
+    bool operator==(const double& d)  {
+    }
 // Overloaded comparison operators
     bool operator>(const Fraction& other) const {
         return (numerator * other.denominator > other.numerator * denominator);
+    }
+    bool operator>(const double& d) const {
     }
 
     bool operator<(const Fraction& other) const {
         return (numerator * other.denominator < other.numerator * denominator);
     }
-
+    bool operator<(const double& d) const {
+    }
 // Overloaded comparison and equalization operators
 
     bool operator>=(const Fraction& other) const {
         return (numerator * other.denominator >= other.numerator * denominator);
     }
-
+    bool operator>=(const double& d)  {
+    }
     bool operator<=(const Fraction& other) const {
         return (numerator * other.denominator <= other.numerator * denominator);
     }
-
+    bool operator<=(const double& d) const {
+    }
 // Overloaded pre-increment operator
     Fraction& operator++() {
         numerator += denominator;

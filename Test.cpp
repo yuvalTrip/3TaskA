@@ -4,19 +4,20 @@
 
 #include "doctest.h"
 #include <stdexcept>
-#include "sources/player.hpp"
-#include "sources/game.hpp"
-#include "sources/card.hpp"
+#include "sources/Fraction.hpp"
+#include "sources/Fraction.cpp"
+
 using namespace std;
-using namespace ariel;
+//using namespace ariel;
 
 TEST_CASE("The initialization of Fraction")
 {
     // Regular initialization
-    CHECK_NOTHROW(Fraction a(5,3), b(14,21));
+    CHECK_NOTHROW(Fraction a(5,3));
+    CHECK_NOTHROW(Fraction b(14,21));
 
     // Wrong initialization
-    CHECK_THROWS(Fraction a(5,0), b(14,21));
+    CHECK_THROWS(Fraction a(5,0));
 
     // Initialization of 0
     CHECK_THROWS(Fraction a(0,0)); // wrong
@@ -24,7 +25,7 @@ TEST_CASE("The initialization of Fraction")
 
 }
 
-TEST_CASE(" Division operation of fraction by 0 ")
+TEST_CASE(" Division operation by 0 ")
 {
     Fraction a(5,3);
     Fraction b(0,1);
@@ -34,11 +35,11 @@ TEST_CASE(" Division operation of fraction by 0 ")
     cout << "a/b" << a/b << endl;
 }
 
-TEST_CASE(" Division of Fractions")
+TEST_CASE(" Division ")
 {
     Fraction a(5,3), b(14,21);
 
-    // Test division
+    // Test fraction division
     CHECK((a/b) == Fraction(5,2));
     CHECK((b/a) == Fraction(2,5));
 
@@ -47,10 +48,10 @@ TEST_CASE(" Division of Fractions")
     CHECK((2.421/a) == Fraction(7263,5000));
 }
 
-TEST_CASE(" Addition of Fractions") {
+TEST_CASE(" Addition") {
     Fraction a(5,3), b(14,21);
 
-    // Test regular addition
+    // Test fraction addition
     CHECK((a+b) == Fraction(7,3));
     CHECK((b+a) == Fraction(7,3));
 
@@ -66,7 +67,7 @@ TEST_CASE(" Addition of Fractions") {
 TEST_CASE("Subtraction of Fractions") {
     Fraction a(5,3), b(14,21);
 
-    // Test subtraction
+    // Test Fraction subtraction
     CHECK((a-b) == 1);
     CHECK((b-a) == -1);
 
