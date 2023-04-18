@@ -62,8 +62,8 @@ public:
 
     // Overloaded - operator
     Fraction operator-(const double& d)  {
-        ///////////////////////////////////////////////////////////////////////
-
+        double res = d - (static_cast<double>(numerator) / denominator);
+        return Fraction(res);// Return Fraction
     }
 // Overloaded * operator
     Fraction operator*(const Fraction& other) const {
