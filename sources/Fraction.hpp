@@ -54,6 +54,7 @@ namespace ariel {
 //            return Fraction(res);// Return Fraction
 
 
+
 //            int digits = std::to_string(d).length() - 1 - std::to_string(d).find('.');
 //            int denominator = std::pow(10, digits);
 //            int numerator = std::round(denominator * d);
