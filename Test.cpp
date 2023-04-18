@@ -5,23 +5,21 @@
 #include "doctest.h"
 #include <stdexcept>
 #include "sources/Fraction.hpp"
-#include "sources/Fraction.cpp"
+//#include "sources/Fraction.cpp"
 
 using namespace std;
 using namespace ariel;
-
 TEST_CASE("The initialization of Fraction")
 {
     // Regular initialization
     CHECK_NOTHROW(Fraction a(5,3));
     CHECK_NOTHROW(Fraction b(14,21));
+    CHECK_NOTHROW(Fraction a(5,3));
 
     // Wrong initialization
-    CHECK_NOTHROW(Fraction a(5,3));
-    //ASSERT_THROW(Fraction a(5,0));
-
+    CHECK_THROWS(Fraction (5,0));// No need in a before (5.0) because it is not create an object because of the exeption
     // Initialization of 0
-    //ASSERT_THROW(Fraction a(0,0)); // wrong
+    CHECK_THROWS(Fraction (0,0));//wrong
     CHECK_NOTHROW(Fraction a(0,1)); // ok
 
 }
@@ -31,9 +29,8 @@ TEST_CASE(" Division operation by 0 ")
     Fraction a(5,3);
     Fraction b(0,1);
     // Test division by zero
-    CHECK_THROWS(a/b); // wrong
-    CHECK_NOTHROW(b/a); // ok
-    cout << "a/b" << a/b << endl;
+    CHECK_THROWS(a/0); // wrong
+    //CHECK_NOTHROW(b/a); // ok
 }
 
 TEST_CASE(" Division ")

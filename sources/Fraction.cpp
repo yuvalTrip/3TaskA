@@ -3,28 +3,28 @@
 //
 
 #include "Fraction.hpp"
-using namespace ariel;
+//using namespace ariel;
 
-Fraction::Fraction(int numer, int denom)
+ariel::Fraction::Fraction(int numer, int denom)
 // Two-parameter constructor
 {
     numerator = numer;
     denominator = denom;
     if (denominator == 0)
     {
-        throw std::runtime_error("Denominator cannot be zero!");
+        throw std::runtime_error("Denominator can not be zero!");
     }
     simplify();
 }
 
 // Empty constructor
-Fraction::Fraction() {
+ariel::Fraction::Fraction() {
     numerator=0;
     denominator=1;
 };
 
 // One-parameter constructor
-Fraction::Fraction (double d)
+ariel::Fraction::Fraction (double d)
 {// constructor get double number and convert it to Fraction
     // First, extract the whole part of the double and create a Fraction object from it
     int wholePart = static_cast<int>(d);
