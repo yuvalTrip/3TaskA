@@ -13,7 +13,7 @@ using namespace std;
 
 #include "sources/Fraction.hpp"
 
-//using namespace ariel;
+using namespace ariel;
 
 
 int main() {
@@ -24,8 +24,14 @@ int main() {
     cout << "a/b" << a/b << endl; 
     cout << "a*b" << a*b << endl; 
     cout << "2.3*b" << 2.3*b << endl; 
-    cout << "a+2.421" << a+2.421 << endl; 
+    cout << "a+2.421" << a+2.421 << endl;
+    cout << "a:   " << a << endl;
+    cout << "b:   " << b << endl;
+    cout << "a+b:   " << a+b << endl;
+
     Fraction c = a+b-1;
+    cout << "c:   " << c << endl;
+
     cout << c++ << endl;
     cout << --c << endl;
 

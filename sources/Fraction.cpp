@@ -3,6 +3,7 @@
 //
 
 #include "Fraction.hpp"
+using namespace ariel;
 
 Fraction::Fraction(int numer, int denom)
 // Two-parameter constructor
@@ -50,6 +51,10 @@ Fraction::Fraction (double d)
     }
     simplify();
 }
+
+
+
+
 
 
 
