@@ -48,11 +48,17 @@ namespace ariel {
         }
 
         // Overloade + operator (Fraction + double)
-        Fraction operator+(
-                const double &d) //the 'const' make sure that the double parameter is treated as a constant and is not modified inside the function.
+        Fraction operator+(const double &d) //the 'const' make sure that the double parameter is treated as a constant and is not modified inside the function.
         {
-            double res = d + (static_cast<double>(numerator) / denominator);
-            return Fraction(res);// Return Fraction
+//            double res = d + (static_cast<double>(numerator) / denominator);
+//            return Fraction(res);// Return Fraction
+
+
+//            int digits = std::to_string(d).length() - 1 - std::to_string(d).find('.');
+//            int denominator = std::pow(10, digits);
+//            int numerator = std::round(denominator * d);
+//            Fraction f(numerator, denominator);
+//            return (*this + f);
         }
 
         // Overloaded + operator (for double + Fraction)
