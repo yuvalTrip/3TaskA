@@ -36,7 +36,9 @@ TEST_CASE(" Division operation by 0 ")
 TEST_CASE(" Division ")
 {
     Fraction a(5,3), b(14,21);
-
+// Test division by float
+    CHECK((a/2.421) == Fraction(5000,7263));
+    CHECK((2.421/a) == Fraction(7263,5000));
     // Test fraction division
     CHECK((a/b) == Fraction(5,2));
     CHECK((b/a) == Fraction(2,5));

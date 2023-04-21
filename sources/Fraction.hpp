@@ -36,6 +36,25 @@ namespace ariel {
             }
         }
 
+        Fraction float_to_fraction(double x, double tolerance=1e-6) {
+            vector<ll> v;
+            ll a = (ll) x;
+            double f = x - a;
+            while (abs(f) > tolerance) {
+                v.push_back(a);
+                a = (ll) (1.0/f);
+                f = 1.0/f - a;
+            }
+            ll num = 1, den = v.back();
+            for (int i = (int) v.size()-2; i >= 0; --i) {
+                ll tmp = den;
+                den = num + den * v[i];
+                num = tmp;
+            }
+            num += a * den;
+            return Fraction(num, den);
+        }
+
 //// OPERATOR +
 // Overloaded + operator (Fraction + otherFraction)
         Fraction operator+(Fraction &other) {
@@ -50,8 +69,8 @@ namespace ariel {
         // Overloade + operator (Fraction + double)
         Fraction operator+(const double &d) //the 'const' make sure that the double parameter is treated as a constant and is not modified inside the function.
         {
-//            double res = d + (static_cast<double>(numerator) / denominator);
-//            return Fraction(res);// Return Fraction
+            double res = d + (static_cast<double>(numerator) / denominator);
+            return Fraction(res);// Return Fraction
 
 
 
@@ -128,15 +147,25 @@ namespace ariel {
             return Fraction(num, den);
         }
 
-        // Overloaded / operator (Fraction / double)
+//         Overloaded / operator (Fraction / double)
         Fraction operator/(const double &d) {
-            if (d == 0) {
-                throw std::runtime_error("Cannot divide by zero!");
-            }
-            double res = (static_cast<double>(numerator) / denominator) / d;
-            int num = std::round(res * 1000);
-            int den = 1000;
-            return Fraction(num, den);
+//            if (d == 0) {
+//                throw std::runtime_error("Cannot divide by zero!");
+//            }
+//            double res = (static_cast<long double>(numerator) / denominator) / d;
+//            return res;
+        if (d == 0) {
+            throw std::runtime_error("Cannot divide by zero!");
+        }
+        Fraction x=float_to_fraction(d);
+        Fraction original= Fraction (numerator,denominator);
+        return (original/x);
+            //float_to_fraction
+////
+//            double res = (static_cast<double>(numerator) / d) / denominator;
+//            int num = std::round(res * 1000);
+//            int den = 1000;
+//            return Fraction(num, den);
         }
 
         // Overloaded * operator (for double / Fraction)
