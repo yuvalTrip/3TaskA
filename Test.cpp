@@ -61,24 +61,24 @@ TEST_CASE(" Addition") {
     CHECK((Fraction(0,1)+a) == a);
 
     // Test addition with float
-    CHECK((a+2.421) == Fraction(2421, 1000));
-    CHECK((2.421+a) == Fraction(2421, 1000));
+    CHECK((a+2.421) == Fraction(12263, 3000));
+    CHECK((2.421+a) == Fraction(12263, 3000));
 }
 
 TEST_CASE("Subtraction of Fractions") {
     Fraction a(5,3), b(14,21);
-
-//    // Test Fraction subtraction
+    Fraction c(-1,1);
+    // Test Fraction subtraction
     CHECK((a-b) == 1);
-//    CHECK((b-a) == -1);
+    CHECK((b-a) == c);
 
-//    // Test subtraction with zero
-//    CHECK((a-Fraction(0,1)) == a);
-//    CHECK((Fraction(0,1)-a) == Fraction(-5,3));
-//
-//    // Test subtraction with float
-//    CHECK((a-2.421) == Fraction(-2263, 3000));
-//    CHECK((2.421-a) == Fraction(2263, 3000));
+    // Test subtraction with zero
+    CHECK((a-Fraction(0,1)) == a);
+    CHECK((Fraction(0,1)-a) == Fraction(-5,3));
+
+    // Test subtraction with float
+    CHECK((a-2.421) == Fraction(-2263, 3000));
+    CHECK((2.421-a) == Fraction(2263, 3000));
 }
 
 TEST_CASE("Multiplication of Fractions") {
