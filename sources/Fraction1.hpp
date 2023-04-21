@@ -20,7 +20,7 @@
 //// Overloaded + operator (Fraction + otherFraction)
 //        Fraction operator+(const Fraction &other) const;
 //        // Overloade + operator (Fraction + double)
-////        Fraction operator+(const double &d) //the 'const' make sure that the double parameter is treated as a constant and is not modified inside the function.
+////        Fraction operator+(const double &d)
 //        Fraction operator+(float fNum);
 //        // Overloaded + operator (for double + Fraction)
 ////        friend Fraction operator+(const double &d, const Fraction &f) {

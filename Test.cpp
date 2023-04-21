@@ -98,7 +98,8 @@ TEST_CASE("Multiplication of Fractions") {
 }
 
 TEST_CASE("Comparison of Fractions") {
-    Fraction a(5,3), b(14,21), c(-5,3), d(-14,21), e(10,6);
+    Fraction a(5,3), b(14,21), c(-5,3), d(-14,21), e(10,6), f(7,5);
+    CHECK(a > f);
     CHECK(a > c);
     CHECK(d < b);
     CHECK(a >= e);
@@ -107,11 +108,14 @@ TEST_CASE("Comparison of Fractions") {
 
 TEST_CASE("Equality of Fractions") {
     Fraction a(5, 3), b(14, 21), c(15, 9);
+    Fraction d(1, 2), e(2, 4);
 
     // Test equality
     CHECK((a == Fraction(5, 3)));
     CHECK((a == c));
     CHECK_FALSE((a == b));
+    CHECK(d == e);// Check 0.5 is equal with different fractions (because of reduce)
+
 }
 
 TEST_CASE("Increment and Decrement Operators") {
@@ -129,7 +133,7 @@ TEST_CASE("Increment and Decrement Operators") {
 
 // Prefix decrement
     --c;
-    CHECK(c == Fraction(4, 3));
+    CHECK(c == Fraction(4, 3));/////////////////////////////////////////////////////////
 
 // Postfix decrement
     Fraction result_postfix_ = a--;
