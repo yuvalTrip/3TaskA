@@ -16,46 +16,45 @@ namespace ariel
         // I am sending a  reference and not a value is for efficiency not creating another object
         // and using const to make sure the other isn't modified inside the function
         Fraction operator+(const Fraction &other) const;
-        // Fraction operator+(float f) const;
-        Fraction operator-(const Fraction &other) const;
-        // Fraction operator-(float f) const;
-        Fraction operator*(const Fraction &other) const;
-        // Fraction operator*(float f) const;
-        Fraction operator/(const Fraction &other) const;
-        // Fraction operator/(float f) const;
+        Fraction operator+(float fNum);
 
-        // bool functions
+        Fraction operator-(const Fraction &other) const;
+        Fraction operator-(float fNum);
+
+        Fraction operator*(const Fraction &other) const;
+        Fraction operator*(float fNum);
+
+        Fraction operator/(const Fraction &other) const;
+        Fraction operator/(float fNum);
+
+
         bool operator==(const Fraction &other) const;
+        bool operator==(float fNum);
+
         bool operator>(const Fraction &other) const;
+        bool operator>(float fNum);
+
         bool operator<(const Fraction &other) const;
+        bool operator<(float fNum);
+
         bool operator>=(const Fraction &other) const;
+        bool operator>=(float fNum);
+
         bool operator<=(const Fraction &other) const;
+        bool operator<=(float fNum);
 
         Fraction &operator++();   // pre-increment
         Fraction operator++(int); // post-increment
+
         Fraction &operator--();   // pre-decrement
         Fraction operator--(int); // post-decrement
 
-        // float operators
-        Fraction operator+(float fNum);
-        Fraction operator-(float fNum);
-        Fraction operator*(float fNum);
-        Fraction operator/(float fNum);
-
-        // float bool operators
-        bool operator==(float fNum);
-        bool operator>(float fNum);
-        bool operator<(float fNum);
-        bool operator>=(float fNum);
-        bool operator<=(float fNum);
-
-        // Helper functions
         Fraction reduce() const;
         Fraction floatToFraction(float fNum);
         int gcd(int num1, int num2) const;
 
-        friend std::ostream &operator<<(std::ostream &outs, const Fraction &frac);
-        friend std::istream &operator>>(std::istream &ins, Fraction &frac);
+        friend ostream &operator<<(std::ostream &outs, const Fraction &frac);
+        friend istream &operator>>(std::istream &ins, Fraction &frac);
     };
 
     Fraction operator+(float fNum, const Fraction &frac);

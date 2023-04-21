@@ -14,12 +14,12 @@ Fraction::Fraction(int numer, int denom)
 // If denominator is 0
     if (denom == 0)
     {
-        throw std::runtime_error("Denominator can not be zero!");
+        throw runtime_error("Denominator can not be zero!");
     }
     // If denominator or numerator are not int
     if ((typeid(numer)) != typeid(int) || (typeid(denom)) != typeid(int))
     {
-        throw std::runtime_error("Numbers need to be int!");
+        throw runtime_error("Numbers need to be int!");
     }
 // If initialization correct
     // We will simplify the fraction
@@ -279,13 +279,18 @@ Fraction Fraction::operator--(int)
 }
 
 ///  << operator //
-ostream &ariel::operator<<(std::ostream &outs, const Fraction &f)
+ostream &ariel::operator<<(ostream &outs, const Fraction &frac)
 {
-    outs << f.numerator << "/" << f.denominator; //Fraction form
+    outs << frac.numerator << "/" << frac.denominator; //Fraction form
     return outs;
 }
+
+//friend ostream& operator<<(ostream& os, const Fraction& frac) {
+//    os << frac.numerator << "/" << frac.denominator;
+//    return os;
+//}
 ///  >> operator //
-istream &ariel::operator>>(std::istream &ins, Fraction &f)
+istream &ariel::operator>>(istream &ins, Fraction &f)
 {
     int num, den;
     ins >> num >> den;
