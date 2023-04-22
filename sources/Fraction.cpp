@@ -28,16 +28,26 @@ Fraction::Fraction(int numer, int denom)
     numerator = numer/gcdNum;
     denominator = denom/gcdNum;
 }
-//
-//Fraction floatToFraction(const float float_num)
-//{
-//    int intF = static_cast<int>(float_num * 1000 + 0.5);
-//
-//    int den = 1000;
-//
-//    return Fraction(intF, den).reduce();
-//}
+// Function to convert float number to fraction number
+Fraction floatToFraction(const float float_num)
+{// Global fraction (in use only in case of float-operator-Fraction i.e to operators outstide the Fraction class)
+    //0.5555*1000=555.5, +0.5= 556 ->556
+    //0.5552*1000=555.2, +0.5=555.7 ->555
+    int intF = static_cast<int>(float_num * 1000 + 0.5);
 
+    int den = 1000;
+
+   return Fraction(intF, den).simplify();
+}
+// Function to convert float number to fraction number
+Fraction Fraction::floatToFraction(const float float_num)
+{
+    int intF = static_cast<int>(float_num * 1000 + 0.5);
+
+    int den = 1000;
+
+    return Fraction(intF, den).simplify();
+}
 /// Overload + operator //
     // Fraction + Fraction
 Fraction Fraction::operator+(const Fraction &other) const
@@ -46,7 +56,7 @@ Fraction Fraction::operator+(const Fraction &other) const
     // Machane Meshutaf :)
     int num = (numerator * other.denominator) + (other.numerator * denominator);
     int den = denominator * other.denominator;
-    return Fraction(num, den).reduce();// Simplify
+    return Fraction(num, den).simplify();// Simplify
 }
     // Fraction + Float
 Fraction Fraction::operator+(const float float_num)
@@ -54,7 +64,8 @@ Fraction Fraction::operator+(const float float_num)
     Fraction fracF = floatToFraction(float_num);// Convert float to Fraction
     return (*this) + fracF; // Use the function I implemented before of operator +
 }
-    // Float + Fraction
+
+    // Float + Fraction( GLOBAL FUNCTION)
 Fraction ariel::operator+(const float float_num, const Fraction &frac)
 {
     Fraction fracF = floatToFraction(float_num);// Convert float to Fraction
@@ -68,7 +79,7 @@ Fraction Fraction::operator-(const Fraction &other) const
     // Just the same as I did in operator + (but with -)
     int num = (numerator * other.denominator) - (other.numerator * denominator);
     int den = denominator * other.denominator;
-    return Fraction(num, den).reduce();
+    return Fraction(num, den).simplify();
 }
 // Fraction - Float
 Fraction Fraction::operator-(const float float_num)
@@ -89,7 +100,7 @@ Fraction Fraction::operator*(const Fraction &other) const
     int num = numerator * other.numerator;// Regular multiplication between numerators
     // Regular multiplication between denominators
     int den = denominator * other.denominator;
-    return Fraction(num, den).reduce();// Simplify
+    return Fraction(num, den).simplify();// Simplify
 }
 // Fraction * Float
 Fraction Fraction::operator*(const float float_num)
@@ -115,7 +126,7 @@ Fraction Fraction::operator/(const Fraction &other) const
     {
         throw invalid_argument("Error: Division by zero!");
     }
-    return Fraction(num, den).reduce();// Simplify
+    return Fraction(num, den).simplify();// Simplify
 }
 // Fraction / Float
 Fraction Fraction::operator/(const float float_num)
@@ -134,8 +145,8 @@ Fraction ariel::operator/(const float float_num, const Fraction &frac)
 // Fraction == Fraction
 bool Fraction::operator==(const Fraction &other) const
 {
-    Fraction frac1=Fraction(numerator,denominator).reduce(); // Simplify first fraction
-    Fraction frac2=Fraction (other.numerator,other.denominator).reduce();// Simplify second fraction
+    Fraction frac1=Fraction(numerator,denominator).simplify(); // Simplify first fraction
+    Fraction frac2=Fraction (other.numerator,other.denominator).simplify();// Simplify second fraction
     // Compare numerator with numerator and denom with denom AFTER SIMPLIFYING
     return (frac1.numerator == frac2.numerator) && (frac1.denominator == frac2.denominator);
 }
@@ -269,7 +280,7 @@ Fraction Fraction::operator--(int)
     Fraction original = *this;// Create a copy of the original object
     numerator = numerator- denominator;// Decrease value by 1
     // Return the original object before increment
-    return original.reduce();//And reduce it
+    return original.simplify();//And reduce it
 }
 
 ///  << operator //
@@ -291,24 +302,12 @@ istream &ariel::operator>>(istream &ins, Fraction &f)
 
 
 ///  More functions //
-
-
 // Function to simplify fraction
-Fraction Fraction::reduce() const
-{
-    int gcdVal = gcd(numerator, denominator); // Find the greatest common divisor of the numerator and denominator
-    int num = numerator / gcdVal;             // Divide numerator by GCD
-    int den = denominator / gcdVal;           // Divide denominator by GCD
-    return Fraction(num, den);                // Return the new simplify Fraction object
-}
-// Function to convert float number to fraction number
-Fraction Fraction::floatToFraction(const float float_num)
-{
-    int intF = static_cast<int>(float_num * 1000 + 0.5);
+Fraction Fraction::simplify() const
+{ //No need in 2 implementation like FloatToFraction because I used it only in operators between 2 fraction or constructor
+    //i.e only class functions
+return Fraction(numerator, denominator); // Return the new simplify Fraction object
 
-    int den = 1000;
-
-    return Fraction(intF, den).reduce();
 }
 
 // Function compute the greatest common divisor of two integers

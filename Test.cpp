@@ -141,3 +141,13 @@ TEST_CASE("Increment and Decrement Operators") {
     CHECK(a == Fraction(5, 3));
 }
 
+TEST_CASE("Equality of Simplifying Fractions") {
+    Fraction a(3, 6), b(2, 8), c(1, 4);
+    Fraction d(1, 2), e(2, 4);
+
+    // Test Simplifying
+    CHECK((a+d== Fraction(1, 1)));
+    CHECK((b == c));
+    CHECK((a == d));
+    CHECK(d == e);// Check 0.5 is equal with different fractions (because of reduce)
+}

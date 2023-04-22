@@ -53,7 +53,7 @@ namespace ariel
         Fraction &operator--();   // pre-decrement
         Fraction operator--(int); // post-decrement
 
-        Fraction reduce() const;
+        Fraction simplify() const;
         Fraction floatToFraction(float float_num);
         int gcd(int num1, int num2) const;
 
