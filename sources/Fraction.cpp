@@ -28,15 +28,15 @@ Fraction::Fraction(int numer, int denom)
     numerator = numer/gcdNum;
     denominator = denom/gcdNum;
 }
-
-Fraction floatToFraction(const float float_num)
-{
-    int intF = static_cast<int>(float_num * 1000 + 0.5);
-
-    int den = 1000;
-
-    return Fraction(intF, den).reduce();
-}
+//
+//Fraction floatToFraction(const float float_num)
+//{
+//    int intF = static_cast<int>(float_num * 1000 + 0.5);
+//
+//    int den = 1000;
+//
+//    return Fraction(intF, den).reduce();
+//}
 
 /// Overload + operator //
     // Fraction + Fraction
@@ -45,7 +45,7 @@ Fraction Fraction::operator+(const Fraction &other) const
     // and is not modified inside the function.
     // Machane Meshutaf :)
     int num = (numerator * other.denominator) + (other.numerator * denominator);
-    int den = this->denominator * other.denominator;
+    int den = denominator * other.denominator;
     return Fraction(num, den).reduce();// Simplify
 }
     // Fraction + Float
@@ -258,24 +258,18 @@ Fraction Fraction::operator++(int)
 // pre-decrement
 Fraction &Fraction::operator--()
 {
-    // Decrement the value by 1
-    numerator = numerator-denominator;
-
-    // return reference to the updates object so you can carry on working with it updated
-    return *this;
+    numerator = numerator-denominator;// Decrease value by 1
+    return *this;// Return reference to the updates object
+    // So I will continue working with the new one
 }
+
 // post-decrement
 Fraction Fraction::operator--(int)
 {
-
-    // Create a copy of the original object
-    Fraction original = *this;
-
-    // Decrement the value of the object by one
-    numerator = numerator- denominator;
-
-    // Return the original object before increment may need to reduce original value
-    return original;
+    Fraction original = *this;// Create a copy of the original object
+    numerator = numerator- denominator;// Decrease value by 1
+    // Return the original object before increment
+    return original.reduce();//And reduce it
 }
 
 ///  << operator //

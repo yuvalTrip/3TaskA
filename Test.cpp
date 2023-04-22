@@ -30,7 +30,7 @@ TEST_CASE(" Division operation by 0 ")
     Fraction b(0,1);
     // Test division by zero
     CHECK_THROWS(a/0); // wrong
-    //CHECK_NOTHROW(b/a); // ok
+    CHECK_NOTHROW(b/a); // ok
 }
 
 TEST_CASE(" Division ")
@@ -69,7 +69,7 @@ TEST_CASE("Subtraction of Fractions") {
     Fraction a(5,3), b(14,21);
     Fraction c(-1,1);
     // Test Fraction subtraction
-    CHECK((a-b) == 1);
+    CHECK((a-b) == Fraction(1,1));
     CHECK((b-a) == c);
 
     // Test subtraction with zero
@@ -133,7 +133,7 @@ TEST_CASE("Increment and Decrement Operators") {
 
 // Prefix decrement
     --c;
-    CHECK(c == Fraction(4, 3));/////////////////////////////////////////////////////////
+    CHECK(c == Fraction(1, 3));
 
 // Postfix decrement
     Fraction result_postfix_ = a--;
