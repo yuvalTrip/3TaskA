@@ -61,6 +61,7 @@ namespace ariel
     Fraction operator-(float fNum, const Fraction &frac);
     Fraction operator*(float fNum, const Fraction &frac);
     Fraction operator/(float fNum, const Fraction &frac);
+
     bool operator==(float fNum, const Fraction &frac);
     bool operator>(float fNum, const Fraction &frac);
     bool operator>=(float fNum, const Fraction &frac);

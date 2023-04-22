@@ -285,10 +285,6 @@ ostream &ariel::operator<<(ostream &outs, const Fraction &frac)
     return outs;
 }
 
-//friend ostream& operator<<(ostream& os, const Fraction& frac) {
-//    os << frac.numerator << "/" << frac.denominator;
-//    return os;
-//}
 ///  >> operator //
 istream &ariel::operator>>(istream &ins, Fraction &f)
 {
@@ -320,7 +316,6 @@ Fraction Fraction::floatToFraction(const float float_num)
 
     return Fraction(intF, den).reduce();
 }
-
 
 // Function compute the greatest common divisor of two integers
 int Fraction::gcd(int num1, int num2) const
