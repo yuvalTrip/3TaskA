@@ -34,12 +34,6 @@ Fraction::Fraction(int numer, int denom)
     numerator = numer;
     denominator = denom;
     simplify();
-
-//    // We will simplify the fraction
-//    int gcdNum = gcd(numer, denom);// Find the GCD
-//    // Divide each one of the numerator and denominator by the gcd we found
-//    numerator = numer/gcdNum;
-//    denominator = denom/gcdNum;
 }
 // Function to convert float number to fraction number
 Fraction floatToFraction(const float float_num)
@@ -262,7 +256,7 @@ Fraction &Fraction::operator++()
 {
     // by adding the denominator to the numerator we are adding 1
     numerator =numerator+denominator;
-
+    simplify();
     // return reference to the updates object so you can carry on working with it updated
     return *this;
 }
@@ -271,6 +265,7 @@ Fraction Fraction::operator++(int)
 {
     Fraction original = *this;// Create a copy of the original object
     numerator =numerator+denominator;// Increase the value by 1
+    simplify();
     return original;// Return the original object before increment
 
 }
@@ -279,6 +274,7 @@ Fraction Fraction::operator++(int)
 Fraction &Fraction::operator--()
 {
     numerator = numerator-denominator;// Decrease value by 1
+    simplify();
     return *this;// Return reference to the updates object
     // So I will continue working with the new one
 }
@@ -288,15 +284,9 @@ Fraction Fraction::operator--(int)
 {
     Fraction original = *this;// Create a copy of the original object
     numerator = numerator- denominator;// Decrease value by 1
+    simplify();
     // Return the original object before increment
     return original;
-}
-
-///  << operator //
-ostream &ariel::operator<<(ostream &outs, const Fraction &frac)
-{
-    outs << frac.numerator << "/" << frac.denominator; //Fraction form
-    return outs;
 }
 
 ///  >> operator //
@@ -310,7 +300,13 @@ istream &ariel::operator>>(istream &ins, Fraction &f)
 }
 
 
-///  More functions //
+///  << operator //
+ostream &ariel::operator<<(ostream &outs, const Fraction &frac)
+{
+    outs << frac.numerator << "/" << frac.denominator; //Fraction form
+    return outs;
+}
+
 // Function compute the greatest common divisor of two integers
 int Fraction::gcd(int num1, int num2) const
 {

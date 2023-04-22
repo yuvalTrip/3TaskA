@@ -123,7 +123,7 @@ TEST_CASE("Increment and Decrement Operators") {
     Fraction c = a + b - 1;
 
     // Prefix increment
-    ++a;
+    CHECK(++a==Fraction(8,3));
     CHECK(a == Fraction(8, 3));
 
 // Postfix increment
@@ -132,7 +132,7 @@ TEST_CASE("Increment and Decrement Operators") {
     CHECK(b == Fraction(35, 21));
 
 // Prefix decrement
-    --c;
+    CHECK(--c==Fraction(1,3));
     CHECK(c == Fraction(1, 3));
 
 // Postfix decrement
